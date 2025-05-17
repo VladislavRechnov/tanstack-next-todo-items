@@ -1,3 +1,4 @@
+import TanstackProvider from '@/lib/queryClient'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -12,7 +13,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <TanstackProvider>
+          <header>header</header>
+          <main>{children}</main>
+          <footer>footer</footer>
+        </TanstackProvider>
+      </body>
     </html>
   )
 }
