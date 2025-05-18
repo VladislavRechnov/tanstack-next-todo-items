@@ -6,12 +6,7 @@ import { Box } from '@mui/material'
 export default function Home() {
   return (
     <>
-      <Box
-        sx={{
-          maxHeight: '80vh',
-          overflow: 'auto',
-        }}
-      >
+      <Box className="custom-scrollbar max-h-[80vh] overflow-auto pr-2.5">
         <TodoList />
       </Box>
     </>

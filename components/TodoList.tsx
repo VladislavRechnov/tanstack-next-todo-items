@@ -12,16 +12,7 @@ export default function TodoList() {
       {isLoading && <div>Loading...</div>}
       {isError && <div>Error!</div>}
       {!isLoading && !isError && (
-        <List
-          sx={{
-            display: 'grid',
-            boxSizing: 'border-box',
-            gridTemplateColumns: '1fr 1fr',
-            gap: 2,
-            borderRadius: 1,
-            padding: '20px 0',
-          }}
-        >
+        <List className="grid grid-cols-2 gap-4 rounded-lg py-5">
           {todos?.map((todo) => {
             return <TodoItem todo={todo} key={todo.id} />
           })}

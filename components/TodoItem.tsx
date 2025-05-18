@@ -13,40 +13,16 @@ export default function TodoItem({ todo }: TodoItemProps) {
 
   return (
     <ListItem
-      sx={{
-        bgcolor: `${completed ? 'rgba(52, 216, 126, 0.5)' : '#9e754783'}`,
-        transition: 'all 0.3s ease',
-        borderRadius: '10px',
-        padding: '10px 20px',
-        boxShadow: 3,
-        display: 'flex',
-        justifyContent: 'space-between',
-        color: 'white',
-        cursor: 'pointer',
-        '&:hover': {
-          background: 'rgba(255,255,255,0.1)',
-        },
-      }}
+      className={`flex items-center justify-between rounded-xl px-2.5 py-5 text-amber-50 shadow-md ${completed ? 'bg-emerald-600' : 'bg-amber-900'}`}
     >
       <Checkbox checked={completed} />
       <ListItemText>{title}</ListItemText>
 
-      <Link href={`/todos/${id}`}>
-        <ReadMoreIcon
-          sx={{
-            color: 'white',
-            verticalAlign: 'middle',
-            margin: '0 8px',
-            padding: 1,
-            transition: 'all 0.3s ease',
-            '&:hover': {
-              color: 'rgba(255, 255, 255, 0.705)',
-            },
-          }}
-        />
+      <Link className="text-base" href={`/todos/${id}`}>
+        <ReadMoreIcon className="mx-2 my-0 align-middle text-amber-50 transition-colors duration-300 ease-in hover:text-blue-500" />
       </Link>
 
-      <ListItemButton sx={{ flexGrow: 0 }}>
+      <ListItemButton className="grow-0">
         <ClearIcon />
       </ListItemButton>
     </ListItem>
