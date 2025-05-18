@@ -1,12 +1,12 @@
 'use client'
 
-import { Button } from '@mui/material'
+import Link from 'next/link'
 
 export default function Page() {
   return (
     <>
       HELLO PAGE!
-      <Button href="/">BACK</Button>
+      <Link href="/">BACK</Link>
     </>
   )
 }
