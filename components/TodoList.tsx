@@ -1,23 +1,38 @@
-import { getTodos } from '@/lib/api'
-import { List } from '@mui/material'
-import { useQuery } from '@tanstack/react-query'
-import TodoItem from './TodoItem'
+'use client'
 
-export default function TodoList() {
-  const queryTodos = useQuery({ queryKey: ['todos'], queryFn: getTodos })
-  const { data: todos, isLoading, isError } = queryTodos
+import { Alert, Box, CircularProgress, List } from '@mui/material'
+import TodoItem from './TodoItem'
+import { Todo } from '@/types/todo'
+import { useQuery } from '@tanstack/react-query'
+
+interface TodoListProps {
+  todosKey: (string | number)[]
+  todosQueryFunction: () => Promise<Todo[]>
+}
+
+export default function TodoList({
+  todosKey,
+  todosQueryFunction,
+}: TodoListProps) {
+  const queryTodos = useQuery({
+    queryKey: todosKey,
+    queryFn: todosQueryFunction,
+  })
+  const { data: todos, isSuccess, isLoading, isError, error } = queryTodos
 
   return (
-    <>
-      {isLoading && <div>Loading...</div>}
-      {isError && <div>Error!</div>}
-      {!isLoading && !isError && (
-        <List className="grid grid-cols-2 gap-4 rounded-lg py-5">
-          {todos?.map((todo) => {
-            return <TodoItem todo={todo} key={todo.id} />
+    <Box
+      className={`custom-scrollbar h-[80vh] overflow-auto pr-2.5 ${(isLoading || isError) && 'flex items-center justify-center'}`}
+    >
+      {isLoading && <CircularProgress size="128px" />}
+      {isError && <Alert severity="error">{error.message}</Alert>}
+      {isSuccess && (
+        <List className="grid grid-cols-1 gap-y-4 rounded-lg">
+          {todos?.map((todo, index) => {
+            return <TodoItem todo={todo} key={todo.id} todoIndex={index} />
           })}
         </List>
       )}
-    </>
+    </Box>
   )
 }

@@ -1,8 +1,9 @@
 'use client'
 
+import StatsFooter from '@/components/StatsFooter'
 import './globals.css'
 import TanstackProvider from '@/lib/queryClient'
-import { Container } from '@mui/material'
+import FilterTabs from '@/components/FilterTabs'
 
 export default function RootLayout({
   children,
@@ -11,13 +12,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="m-0 bg-gray-700">
+      <body className="m-0 bg-gray-700 text-amber-50">
         <TanstackProvider>
-          <Container className="grid-rows-(10vh 80vh 10vh) grid h-screen">
-            <header>Todos</header>
+          <section className="grid-rows-(10vh 80vh 10vh) mx-auto my-0 grid h-screen max-w-4/6">
+            <FilterTabs />
             <main>{children}</main>
-            <footer>footer</footer>
-          </Container>
+            <StatsFooter />
+          </section>
         </TanstackProvider>
       </body>
     </html>

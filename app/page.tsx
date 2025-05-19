@@ -1,14 +1,8 @@
 'use client'
 
 import TodoList from '@/components/TodoList'
-import { Box } from '@mui/material'
+import { getAllTodos } from '@/lib/api'
 
 export default function Home() {
-  return (
-    <>
-      <Box className="custom-scrollbar max-h-[80vh] overflow-auto pr-2.5">
-        <TodoList />
-      </Box>
-    </>
-  )
+  return <TodoList todosKey={['todos']} todosQueryFunction={getAllTodos} />
 }
