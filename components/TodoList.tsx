@@ -18,13 +18,13 @@ export default function TodoList({
     queryKey: todosKey,
     queryFn: todosQueryFunction,
   })
-  const { data: todos, isSuccess, isLoading, isError, error } = queryTodos
+  const { data: todos, isSuccess, isPending, isError, error } = queryTodos
 
   return (
     <Box
-      className={`custom-scrollbar h-[80vh] overflow-auto pr-2.5 ${(isLoading || isError) && 'flex items-center justify-center'}`}
+      className={`custom-scrollbar max-h-[750px] min-h-[70vh] overflow-auto pr-2.5 ${(isPending || isError) && 'flex items-center justify-center'}`}
     >
-      {isLoading && <CircularProgress size="128px" />}
+      {isPending && <CircularProgress size="128px" />}
       {isError && <Alert severity="error">{error.message}</Alert>}
       {isSuccess && (
         <List className="grid grid-cols-1 gap-y-4 rounded-lg">

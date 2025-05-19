@@ -10,13 +10,13 @@ export default function StatsFooter() {
     queryFn: getAllTodos,
   })
 
-  const { data: todos, isSuccess, isLoading, isError, error } = queryTodos
+  const { data: todos, isSuccess, isPending, isError, error } = queryTodos
 
   return (
     <footer>
-      <Typography>
+      <Typography className="py-4">
         {isError && `${error.message}`}
-        {isLoading && 'Loading...'}
+        {isPending && 'Loading...'}
         {isSuccess && `${todos.length} items left`}
       </Typography>
     </footer>

@@ -17,12 +17,7 @@ export default function FilterTabs() {
   }
 
   return (
-    <Tabs
-      className="mt-4 max-h-12"
-      value={value}
-      onChange={handleChange}
-      aria-label="basic tabs example"
-    >
+    <Tabs className="mt-4 max-h-12" value={value} onChange={handleChange}>
       <Tab label="All Todos" value="" />
       <Tab label="Active Todos" value="active" />
       <Tab label="Completed Todos" value="completed" />
