@@ -1,9 +1,14 @@
 import { Todo } from '@/types/todo'
-import { Checkbox, ListItem, ListItemButton, ListItemText } from '@mui/material'
+import {
+  Checkbox,
+  ListItem,
+  ListItemButton,
+  ListItemText,
+  Typography,
+} from '@mui/material'
 import ClearIcon from '@mui/icons-material/Clear'
 import ReadMoreIcon from '@mui/icons-material/ReadMore'
 import Link from 'next/link'
-import { Typography } from '@material-tailwind/react'
 
 interface TodoItemProps {
   todo: Todo

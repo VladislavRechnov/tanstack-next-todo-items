@@ -1,7 +1,7 @@
 'use client'
 
 import { getAllTodos } from '@/lib/api'
-import { Typography } from '@material-tailwind/react'
+import { Typography } from '@mui/material'
 import { useQuery } from '@tanstack/react-query'
 
 export default function StatsFooter() {

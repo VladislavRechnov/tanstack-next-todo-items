@@ -2,7 +2,7 @@
 
 import { getTodoById } from '@/lib/api'
 import { Todo } from '@/types/todo'
-import { Button } from '@material-tailwind/react'
+import { Button } from '@mui/material'
 import { useQuery } from '@tanstack/react-query'
 import { useParams, useRouter } from 'next/navigation'
 
