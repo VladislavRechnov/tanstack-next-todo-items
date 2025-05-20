@@ -4,6 +4,7 @@ import { Alert, Box, CircularProgress, List } from '@mui/material'
 import TodoItem from './TodoItem'
 import { Todo } from '@/types/todo'
 import { useQuery } from '@tanstack/react-query'
+import { useEffect, useState } from 'react'
 
 interface TodoListProps {
   todosKey: (string | number)[]
@@ -16,6 +17,12 @@ export default function TodoList({
   todosApiUrl,
   initialTodos,
 }: TodoListProps) {
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
   const queryTodos = useQuery({
     queryKey: todosKey,
     queryFn: async (): Promise<Todo[]> => {
@@ -25,6 +32,8 @@ export default function TodoList({
     initialData: initialTodos,
   })
   const { data: todos, isSuccess, isPending, isError, error } = queryTodos
+
+  if (!mounted) return null
 
   return (
     <Box
