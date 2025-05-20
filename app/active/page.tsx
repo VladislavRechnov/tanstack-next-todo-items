@@ -1,13 +1,14 @@
-'use client'
-
 import TodoList from '@/components/TodoList'
-import { getActiveTodos } from '@/lib/api'
+import { API_TODOS_URL, getActiveTodos } from '@/lib/api'
 
-export default function Page() {
+export default async function Page() {
+  const initialActiveTodos = await getActiveTodos()
+
   return (
     <TodoList
       todosKey={['todos', 'active']}
-      todosQueryFunction={getActiveTodos}
+      todosApiUrl={API_TODOS_URL.activeTodos}
+      initialTodos={initialActiveTodos}
     />
   )
 }

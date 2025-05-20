@@ -1,13 +1,14 @@
-'use client'
-
 import TodoList from '@/components/TodoList'
-import { getCompletedTodos } from '@/lib/api'
+import { API_TODOS_URL, getCompletedTodos } from '@/lib/api'
 
-export default function Page() {
+export default async function Page() {
+  const initialCompltetdTodos = await getCompletedTodos()
+
   return (
     <TodoList
       todosKey={['todos', 'completed']}
-      todosQueryFunction={getCompletedTodos}
+      todosApiUrl={API_TODOS_URL.completedTodos}
+      initialTodos={initialCompltetdTodos}
     />
   )
 }

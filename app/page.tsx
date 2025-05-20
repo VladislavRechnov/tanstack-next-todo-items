@@ -1,8 +1,14 @@
-'use client'
-
 import TodoList from '@/components/TodoList'
-import { getAllTodos } from '@/lib/api'
+import { API_TODOS_URL, getAllTodos } from '@/lib/api'
 
-export default function Home() {
-  return <TodoList todosKey={['todos']} todosQueryFunction={getAllTodos} />
+export default async function Home() {
+  const initialTodos = await getAllTodos()
+
+  return (
+    <TodoList
+      todosKey={['todos']}
+      todosApiUrl={API_TODOS_URL.allTodos}
+      initialTodos={initialTodos}
+    />
+  )
 }

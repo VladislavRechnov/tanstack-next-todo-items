@@ -1,3 +1,5 @@
+'use client'
+
 import { TextField } from '@mui/material'
 
 export function TodoInput() {
@@ -6,6 +8,7 @@ export function TodoInput() {
       id="outlined-basic"
       label="New todo"
       variant="outlined"
+      className="mt-4"
       slotProps={{
         input: { className: 'text-amber-50' },
         inputLabel: { className: 'text-amber-50' },

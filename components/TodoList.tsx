@@ -7,16 +7,22 @@ import { useQuery } from '@tanstack/react-query'
 
 interface TodoListProps {
   todosKey: (string | number)[]
-  todosQueryFunction: () => Promise<Todo[]>
+  todosApiUrl: string
+  initialTodos: Todo[]
 }
 
 export default function TodoList({
   todosKey,
-  todosQueryFunction,
+  todosApiUrl,
+  initialTodos,
 }: TodoListProps) {
   const queryTodos = useQuery({
     queryKey: todosKey,
-    queryFn: todosQueryFunction,
+    queryFn: async (): Promise<Todo[]> => {
+      const responce = await fetch(todosApiUrl)
+      return await responce.json()
+    },
+    initialData: initialTodos,
   })
   const { data: todos, isSuccess, isPending, isError, error } = queryTodos
 
