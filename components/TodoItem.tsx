@@ -7,13 +7,14 @@ import ReadMoreIcon from '@mui/icons-material/ReadMore'
 import Link from 'next/link'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { deleteTodoItem, TODOS_KEY, updateTodoStatus } from '@/lib/api'
+import dayjs from 'dayjs'
 
 interface TodoItemProps {
   todo: Todo
 }
 
 export default function TodoItem({ todo }: TodoItemProps) {
-  const { id, title, completed, userId } = todo
+  const { id, title, completed, userId, createdAt } = todo
   const queryClient = useQueryClient()
 
   const todoCompleteMutation = useMutation({
@@ -24,9 +25,16 @@ export default function TodoItem({ todo }: TodoItemProps) {
       const previousTodos: Todo[] = queryClient.getQueryData(TODOS_KEY) ?? []
 
       const optimisticTodos = previousTodos.map((todo) => {
-        return todo.id === id
-          ? { userId: userId, id, title, completed: !completed }
-          : todo
+        const updatedTodo: Todo = {
+          userId: userId,
+          id,
+          title,
+          completed: !completed,
+          createdAt,
+          updatedAt: dayjs().format(),
+        }
+
+        return todo.id === id ? updatedTodo : todo
       })
 
       queryClient.setQueryData(TODOS_KEY, optimisticTodos)

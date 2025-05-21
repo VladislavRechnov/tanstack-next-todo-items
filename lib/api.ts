@@ -5,8 +5,6 @@ export const TODOS_KEY: TodosKey = ['todos']
 
 export const API_TODOS_URL = {
   allTodos: `${API_URL}/todos`,
-  activeTodos: `${API_URL}/todos?completed=false`,
-  completedTodos: `${API_URL}/todos?completed=true`,
 } as const
 
 export async function getAllTodos(): Promise<Todo[]> {
@@ -37,5 +35,17 @@ export async function updateTodoStatus(
 export async function deleteTodoItem(todoId: Todo['id']) {
   await fetch(`${API_TODOS_URL.allTodos}/${todoId}`, {
     method: 'DELETE',
+  })
+}
+
+export async function createTodoItem(newTodo: Todo) {
+  await fetch(`${API_TODOS_URL.allTodos}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      newTodo,
+    }),
   })
 }
