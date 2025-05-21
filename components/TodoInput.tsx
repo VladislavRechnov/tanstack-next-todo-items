@@ -31,7 +31,7 @@ export function TodoInput() {
       }
     },
     onSuccess: async (data: { todos: Todo[] } | void) => {
-      await queryClient.setQueryData(TODOS_KEY, data?.todos)
+      queryClient.setQueryData(TODOS_KEY, data?.todos)
     },
     onSettled: () => console.log('Complete status updated'),
   })

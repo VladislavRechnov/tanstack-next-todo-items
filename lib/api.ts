@@ -32,6 +32,21 @@ export async function updateTodoStatus(
   })
 }
 
+export async function updateTodoTitle(
+  todoId: Todo['id'],
+  newTitle: Todo['title']
+) {
+  await fetch(`${API_TODOS_URL.allTodos}/${todoId}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      title: newTitle,
+    }),
+  })
+}
+
 export async function deleteTodoItem(todoId: Todo['id']) {
   await fetch(`${API_TODOS_URL.allTodos}/${todoId}`, {
     method: 'DELETE',
