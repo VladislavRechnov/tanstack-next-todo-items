@@ -14,7 +14,7 @@ export default function TanstackProvider({ children }: TanstackProviderProps) {
       new QueryClient({
         defaultOptions: {
           queries: {
-            staleTime: 1000 * 1000,
+            staleTime: Infinity,
           },
         },
       })

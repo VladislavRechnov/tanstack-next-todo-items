@@ -33,7 +33,7 @@ export function TodoInput() {
     onSuccess: async (data: { todos: Todo[] } | void) => {
       queryClient.setQueryData(TODOS_KEY, data?.todos)
     },
-    onSettled: () => console.log('Complete status updated'),
+    onSettled: () => console.log('New todo added'),
   })
 
   useEffect(() => {

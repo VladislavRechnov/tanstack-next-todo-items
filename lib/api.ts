@@ -1,7 +1,6 @@
 import { Todo } from '@/types/todo'
-import { TodosKey } from '@/types/todosKey'
 const API_URL = 'https://jsonplaceholder.typicode.com'
-export const TODOS_KEY: TodosKey = ['todos']
+export const TODOS_KEY = ['todos'] as const
 
 export const API_TODOS_URL = {
   allTodos: `${API_URL}/todos`,
@@ -9,11 +8,6 @@ export const API_TODOS_URL = {
 
 export async function getAllTodos(): Promise<Todo[]> {
   const response = await fetch(API_TODOS_URL.allTodos)
-  return await response.json()
-}
-
-export async function getTodoById(todoId: Todo['id']): Promise<Todo> {
-  const response = await fetch(`${API_TODOS_URL.allTodos}/${todoId}`)
   return await response.json()
 }
 

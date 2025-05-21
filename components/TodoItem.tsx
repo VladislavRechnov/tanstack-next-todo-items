@@ -128,7 +128,7 @@ export default function TodoItem({ todo }: TodoItemProps) {
     onSuccess: async (data: { todos: Todo[] } | void) => {
       queryClient.setQueryData(TODOS_KEY, data?.todos)
     },
-    onSettled: () => console.log('Todo item deleted'),
+    onSettled: () => console.log('Todo title updated'),
   })
 
   function changeTodoCompletedStatusHandler() {
