@@ -1,5 +1,7 @@
 import { Todo } from '@/types/todo'
+import { TodosKey } from '@/types/todosKey'
 const API_URL = 'https://jsonplaceholder.typicode.com'
+export const TODOS_KEY: TodosKey = ['todos']
 
 export const API_TODOS_URL = {
   allTodos: `${API_URL}/todos`,
@@ -12,17 +14,28 @@ export async function getAllTodos(): Promise<Todo[]> {
   return await response.json()
 }
 
-export async function getActiveTodos(): Promise<Todo[]> {
-  const response = await fetch(API_TODOS_URL.activeTodos)
+export async function getTodoById(todoId: Todo['id']): Promise<Todo> {
+  const response = await fetch(`${API_TODOS_URL.allTodos}/${todoId}`)
   return await response.json()
 }
 
-export async function getCompletedTodos(): Promise<Todo[]> {
-  const response = await fetch(API_TODOS_URL.completedTodos)
-  return await response.json()
+export async function updateTodoStatus(
+  todoId: Todo['id'],
+  newStatus: Todo['completed']
+) {
+  await fetch(`${API_TODOS_URL.allTodos}/${todoId}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      completed: newStatus,
+    }),
+  })
 }
 
-export async function getTodoById(id: Todo['id']): Promise<Todo> {
-  const response = await fetch(`${API_TODOS_URL.allTodos}/${id}`)
-  return await response.json()
+export async function deleteTodoItem(todoId: Todo['id']) {
+  await fetch(`${API_TODOS_URL.allTodos}/${todoId}`, {
+    method: 'DELETE',
+  })
 }

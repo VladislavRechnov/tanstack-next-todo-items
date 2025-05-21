@@ -2,6 +2,7 @@
 
 import { getTodoById } from '@/lib/api'
 import { Todo } from '@/types/todo'
+import { TodosKey } from '@/types/todosKey'
 import { Button, Card, Typography } from '@mui/material'
 import { useQuery } from '@tanstack/react-query'
 import { useParams, useRouter } from 'next/navigation'
@@ -9,10 +10,11 @@ import { useParams, useRouter } from 'next/navigation'
 export default function Page() {
   const { id } = useParams()
   const todoId: Todo['id'] = Number(id)
+  const todoKey: TodosKey = ['todos', todoId]
   const router = useRouter()
 
   const queryTodo = useQuery({
-    queryKey: ['todos', todoId],
+    queryKey: todoKey,
     queryFn: () => getTodoById(todoId),
   })
 
@@ -28,7 +30,7 @@ export default function Page() {
       </Typography>
       {isPending && (
         <Typography variant="h3" className="mb-4 text-4xl">
-          Loading...
+          Loading... 12
         </Typography>
       )}
       {isError && (

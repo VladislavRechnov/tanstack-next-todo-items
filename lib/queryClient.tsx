@@ -9,7 +9,16 @@ interface TanstackProviderProps {
 }
 
 export default function TanstackProvider({ children }: TanstackProviderProps) {
-  const [queryClient] = useState(() => new QueryClient())
+  const [queryClient] = useState(
+    () =>
+      new QueryClient({
+        defaultOptions: {
+          queries: {
+            staleTime: 1000 * 1000,
+          },
+        },
+      })
+  )
 
   return (
     <QueryClientProvider client={queryClient}>
