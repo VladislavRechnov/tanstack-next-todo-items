@@ -1,6 +1,6 @@
 'use client'
 
-import { useGetAllTodos } from '@/app/hooks/useGetAllTodos'
+import { useGetAllTodos } from '@/hooks/useGetAllTodos'
 import { Box, Typography } from '@mui/material'
 import { useEffect, useState } from 'react'
 

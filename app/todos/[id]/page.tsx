@@ -1,6 +1,6 @@
 'use client'
 
-import { useGetAllTodos } from '@/app/hooks/useGetAllTodos'
+import { useGetAllTodos } from '@/hooks/useGetAllTodos'
 import { Todo } from '@/types/todo'
 import { Button, Card, Typography } from '@mui/material'
 import { useParams, useRouter } from 'next/navigation'
