@@ -1,9 +1,8 @@
 'use client'
 
-import { getAllTodos, TODOS_KEY } from '@/lib/api'
+import { useGetAllTodos } from '@/app/hooks/useGetAllTodos'
 import { Todo } from '@/types/todo'
 import { Button, Card, Typography } from '@mui/material'
-import { useQuery } from '@tanstack/react-query'
 import { useParams, useRouter } from 'next/navigation'
 
 export default function Page() {
@@ -11,17 +10,7 @@ export default function Page() {
   const todoId: Todo['id'] = Number(id)
   const router = useRouter()
 
-  const {
-    data: todos,
-    isPending,
-    isError,
-    isSuccess,
-    error,
-  } = useQuery({
-    queryKey: TODOS_KEY,
-    queryFn: getAllTodos,
-  })
-
+  const { todos, isPending, isSuccess, error } = useGetAllTodos()
   const todo: Todo | undefined = todos?.find((todo) => todo.id === todoId)
 
   if (todo === undefined) {
@@ -54,7 +43,7 @@ export default function Page() {
           Loading... 12
         </Typography>
       )}
-      {isError && (
+      {error && (
         <Typography className="mb-4 text-4xl">{error.message}</Typography>
       )}
       {isSuccess && (
