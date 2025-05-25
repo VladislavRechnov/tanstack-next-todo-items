@@ -1,8 +1,7 @@
 'use client'
 
-import { getAllTodos, TODOS_KEY } from '@/lib/api'
+import { useGetAllTodos } from '@/app/hooks/useGetAllTodos'
 import { Box, Typography } from '@mui/material'
-import { useQuery } from '@tanstack/react-query'
 import { useEffect, useState } from 'react'
 
 export default function StatsFooter() {
@@ -12,12 +11,8 @@ export default function StatsFooter() {
     setMounted(true)
   }, [])
 
-  const queryTodos = useQuery({
-    queryKey: TODOS_KEY,
-    queryFn: getAllTodos,
-  })
+  const { todos, isPending, isSuccess, error } = useGetAllTodos()
 
-  const { data: todos, isSuccess, isPending, isError, error } = queryTodos
   const activeItemsCount = todos?.filter(
     (todo) => todo.completed === false
   ).length
@@ -30,13 +25,13 @@ export default function StatsFooter() {
   return (
     <footer>
       <Box className="py-4">
-        {isError && `${error.message}`}
+        {error && `${error.message}`}
         {isPending && 'Loading...'}
         {isSuccess && (
           <Typography>
-            {todos.length} items left.
+            {todos?.length} items left.
             <br />
-            {activeItemsCount} avtive items left.
+            {activeItemsCount} active items left.
             <br />
             {completedItemsCount} completed items left.
           </Typography>

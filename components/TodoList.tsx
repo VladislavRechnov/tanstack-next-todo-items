@@ -6,7 +6,7 @@ import { Todo } from '@/types/todo'
 import { keepPreviousData, useQuery } from '@tanstack/react-query'
 import { useEffect, useMemo, useState } from 'react'
 import { usePathname } from 'next/navigation'
-import { API_TODOS_URL } from '@/lib/api'
+import { getAllTodos, TODOS_KEY } from '@/lib/api'
 
 interface TodoListProps {
   initialTodos: Todo[]
@@ -27,11 +27,8 @@ export default function TodoList({ initialTodos }: TodoListProps) {
     isError,
     error,
   } = useQuery({
-    queryKey: ['todos'],
-    queryFn: async (): Promise<Todo[]> => {
-      const responce = await fetch(API_TODOS_URL.allTodos)
-      return await responce.json()
-    },
+    queryKey: TODOS_KEY,
+    queryFn: getAllTodos,
     initialData: initialTodos,
     placeholderData: keepPreviousData,
   })

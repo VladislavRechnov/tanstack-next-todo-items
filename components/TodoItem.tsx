@@ -139,7 +139,7 @@ export default function TodoItem({ todo }: TodoItemProps) {
     todoDeleteMutation.mutate()
   }
 
-  function titleDoubleCkickHandler() {
+  function titleDoubleClickHandler() {
     setIsTitleEdit((prev) => !prev)
   }
 
@@ -183,7 +183,7 @@ export default function TodoItem({ todo }: TodoItemProps) {
       ) : (
         <ListItemText
           className="cursor-pointer"
-          onDoubleClick={titleDoubleCkickHandler}
+          onDoubleClick={titleDoubleClickHandler}
         >
           {title}
         </ListItemText>
